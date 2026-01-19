@@ -1,0 +1,280 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 背景图片容器 */
+body {
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    transition: background-image 0.5s ease;
+}
+
+/* 半透明遮罩，增强文字可读性 */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+/* 容器改为半透明，可看到背景图片 */
+.container {
+    background: rgba(255, 255, 255, 0.6); /* 60%透明度的白色背景，确保半透明效果明显 */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    width: 95%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+h1 {
+    color: #222;
+    margin-bottom: 20px;
+    font-size: 24px;
+    line-height: 1.2;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+}
+
+.search-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 搜索框在大屏幕上横向排列 */
+@media (min-width: 480px) {
+    .search-box {
+        flex-direction: row;
+    }
+}
+
+#cityInput {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid rgba(221, 221, 221, 0.8);
+    border-radius: 25px;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.7); /* 70%透明度 */
+    color: #333;
+    backdrop-filter: blur(2px);
+}
+
+#cityInput:focus {
+    border-color: rgba(102, 126, 234, 0.9);
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+#searchBtn {
+    padding: 12px 24px;
+    background: rgba(102, 126, 234, 0.9); /* 90%透明度的紫色背景 */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    backdrop-filter: blur(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+#searchBtn:hover {
+    background: rgba(90, 111, 216, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+#searchBtn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 按钮在大屏幕上固定宽度 */
+@media (min-width: 480px) {
+    #searchBtn {
+        width: auto;
+    }
+}
+
+.weather-info {
+    background: rgba(248, 249, 250, 0.5); /* 50%透明度，更明显的半透明效果 */
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 200px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* 主布局：左侧未来天气，右侧当前天气 */
+.weather-main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 大屏幕上使用左右布局 */
+@media (min-width: 768px) {
+    .weather-main {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .current-weather {
+        flex: 2;
+    }
+    
+    .future-weather {
+        flex: 1;
+        min-width: 150px;
+    }
+}
+
+.current-weather {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 增强文字对比度，确保清晰可见 */
+.current-weather h2 {
+    color: #111;
+    margin-bottom: 12px;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.current-weather p {
+    color: #222;
+    font-size: 16px;
+    margin: 6px 0;
+    word-wrap: break-word;
+}
+
+.current-weather .temperature {
+    font-size: 36px;
+    color: #000;
+    margin: 8px 0;
+    line-height: 1;
+    font-weight: bold;
+}
+
+.current-weather .temp-range {
+    font-size: 18px;
+    color: #333;
+    margin: 8px 0;
+    word-wrap: break-word;
+    font-weight: 500;
+}
+
+.current-weather .advice-section {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(224, 224, 224, 0.8);
+}
+
+.current-weather .advice-item {
+    background: rgba(240, 244, 248, 0.5); /* 50%透明度 */
+    padding: 10px;
+    border-radius: 8px;
+    margin: 6px 0;
+    color: #333;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    border: 1px solid rgba(224, 224, 224, 0.8);
+}
+
+/* 未来天气样式 - 左侧垂直排列 */
+.future-weather {
+    background: rgba(240, 244, 248, 0.5); /* 50%透明度 */
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(224, 224, 224, 0.8);
+}
+
+.future-weather h3 {
+    color: #111;
+    margin-bottom: 12px;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 1px solid rgba(224, 224, 224, 0.8);
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+
+.future-days {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.future-day {
+    background: rgba(255, 255, 255, 0.6); /* 60%透明度 */
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    border: 1px solid rgba(224, 224, 224, 0.8);
+}
+
+.future-day:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.future-day h4 {
+    color: #111;
+    margin-bottom: 6px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.future-day p {
+    color: #222;
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.error {
+    color: #e74c3c;
+    font-size: 18px;
+    font-weight: bold;
+}
